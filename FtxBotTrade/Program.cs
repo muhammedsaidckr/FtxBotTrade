@@ -3,6 +3,7 @@ using CryptoExchange.Net.Authentication;
 using FTX.Net.Clients;
 using FTX.Net.Objects;
 using FTX.Net.Objects.Models;
+using FtxBotTrade;
 using LiteDB;
 using Microsoft.Extensions.Logging;
 
@@ -16,7 +17,7 @@ while (await timer.WaitForNextTickAsync())
 
         var ftxClient = new FTXClient(new FTXClientOptions()
         {
-            ApiCredentials = new ApiCredentials("baseApi", "baseSecret"),
+            ApiCredentials = new ApiCredentials(Settings.baseApi, Settings.baseSecret),
             LogLevel = LogLevel.Trace,
             RequestTimeout = TimeSpan.FromSeconds(60)
         });
@@ -25,7 +26,7 @@ while (await timer.WaitForNextTickAsync())
 
         var ftxTrader = new FTXClient(new FTXClientOptions()
         {
-            ApiCredentials = new ApiCredentials("mirrorApi", "mirrorSecret"),
+            ApiCredentials = new ApiCredentials(Settings.mirrorApi, Settings.mirrorSecret),
             LogLevel = LogLevel.Trace,
             RequestTimeout = TimeSpan.FromSeconds(60)
         });
